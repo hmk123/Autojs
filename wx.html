@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios@0.20.0/dist/axios.min.js"></script>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+</head>
+<body>
+    <div id ='app' class="ad"> 
+        <input type="button" value="查看未使用的注册码" class="get" @click="get">
+        <p>{{joke}}</p>
+        <ol >
+            <li v-for="(item,index) in list" >
+                 {{item}}
+            </li>
+          </ol>
+    </div>
+   
+</body>
+<style>
+    .ad{
+        color: rgb(0, 0, 0);
+    }
+    .get{
+background-color: rgb(35, 117, 87);
+top: 100px;
+width: 200px;
+height: 50px;
+    }
+</style>
+<script>
+
+
+
+var app = new Vue({
+
+
+    el:'#app',
+    data:{
+        joke:'列表',
+        list:[],
+        token : '55_bKeB1KWAVy5zQ7q7NjCx5vqi7yocJE1nY77I54oZ6ZroIEGPD9bcuF9T-0ADJW49JfxbrIMw3SYjJFsWjqlE-EJ3zz7_3OYUXpjJ9ktUq1Y8K94jMB7YnTWQp-AtTTbrz14rabJW6j4oDd3jYEDbACALRQ',
+
+    },
+    methods:{
+       
+
+     
+
+        get:function(){
+            var that = this
+            that.list = []
+            axios.get("https://api.weixin.qq.com/cgi-bin/draft/count?access_token=55_bKeB1KWAVy5zQ7q7NjCx5vqi7yocJE1nY77I54oZ6ZroIEGPD9bcuF9T-0ADJW49JfxbrIMw3SYjJFsWjqlE-EJ3zz7_3OYUXpjJ9ktUq1Y8K94jMB7YnTWQp-AtTTbrz14rabJW6j4oDd3jYEDbACALRQ")
+
+            .then(function(res){
+                req.headers.origin
+                res.header('Access-Control-Allow-Origin', '*') 
+                res.header('Access-Control-Allow-Origin',)
+              // console.log( res)
+               
+
+                
+            },function(err){
+               // console.log(err)
+            })
+        }
+    }
+})
+
+
+
+
+</script>
+</html>
