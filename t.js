@@ -377,6 +377,12 @@ function 找紫色点(所找图) {
   
 
 }
+
+
+
+
+
+
 function main() {
 
 
@@ -390,10 +396,23 @@ function main() {
         tk3 = ui.edt3.getText() + ""
         tk4 = ui.edt4.getText() + ""
         tks = [tk1, tk2, tk3, tk4]
+
+
+
+
+
+        var d = ''
+
+        var xd = true
+
         while (true) {
 
             
-            if (desc("交友设置").findOnce()) {
+
+
+
+
+            if (desc("交友设置").findOnce()    && xd  ) {
                 var node = text("有缘人").findOnce()
                 if (node) {
                     log("有缘人")
@@ -484,6 +503,12 @@ function main() {
                 back()
                 sleep(3000)
    
+
+           
+
+
+
+
                 var node = text("有缘人").findOnce()
                 if (node) {
                     log("有缘人")
@@ -577,6 +602,14 @@ function main() {
             sleep(1000)
         }
     }
+
+
+
+
+
+
+
+
     function 自动回复() {
         var node = descEndsWith("的头像").findOne(6666)
         if (node) {
@@ -728,9 +761,23 @@ function main() {
 
         var node2 = text("明天再回友缘来向更多人表心动吧").findOnce()
 
+        var node3 = text("不来电？").findOnce()
 
-        
+        var node4 = text("稍后回来").findOnce()
+
         if (node2) {return 0 }
+        if (node3) {
+back()
+sleep(3000)
+xd = false
+            return 0 }
+        if (node4) {
+            back()
+sleep(3000)
+xd = false
+            return 0 
+        }
+
 
         if (node) {
             log("对你心动", node.bounds())

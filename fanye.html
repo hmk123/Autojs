@@ -1,0 +1,97 @@
+<style>
+	body{
+	 	background:#666666;
+		margin: 0;
+		padding: 0;
+	}
+	.book{
+		position: relative;
+		margin: 200px auto;/*让book在页面居中*/
+		width:200px;
+		height: 300px;
+		background-color: #B22222;
+		transform-style: preserve-3d;/*开启3D*/
+	}
+	#page1,#page2,#page3,#page4{
+		transform-style: preserve-3d;/*开启3D*/
+		transition: 2s;/*时间是两秒*/
+		transform-origin: left;/*并将其旋转元素的基点位置设置成左边*/
+		position: absolute;/*将其分别定位在book中*/
+		left:0;
+		top:0;
+		width:200px;
+		height:300px;
+	}
+	/*设置每页的层叠等级*/
+	#page1{
+		z-index: 4;
+	}
+	#page2{
+		z-index: 3;
+	}
+	#page3{
+		z-index: 2;
+	}
+	#page4{
+		z-index:1;
+	}
+	.before{
+		width:200px;
+		height:300px;
+		position: absolute;
+		left:0;
+		top:0;
+		background-color: #32CD32;
+		text-align:center;
+		box-sizing: border-box;
+		border:10px solid white;
+		font:bold 36px/300px arial;
+		backface-visibility: hidden;
+	}
+	.after{
+		position:absolute;
+		width:200px;
+		height: 300px;
+		box-sizing: border-box;
+		left:0;
+		top:0;
+		background-color:#DCDCDC;
+		border:10px solid white;
+	}
+</style>
+<body>
+	<div class="book">
+		<div id="page1">
+			<div class="after"></div>
+			<div class="before">HTML5</div>
+		</div>
+		<div id="page2">
+			<div class="after"></div>
+			<div class="before">CSS3</div>
+		</div>
+		<div id="page3">
+			<div class="after"></div>
+			<div class="before">Javascript</div>
+		</div>
+		<div id="page4">
+			<div class="after"></div>
+			<div class="before">END</div>
+		</div>
+	</div>
+	<script>
+		var page=0;
+		var pagedemo = document.querySelectorAll("[id^='page']");
+		var bookdemo = document.querySelector(".book");
+		bookdemo.οnclick=function(){
+			pagedemo[page].style.transition="2s";
+			pagedemo[page].style.transform="rotateY(-135deg)";
+			page++;
+			if(page==4){
+				var i;
+				for(i=page-1;i>=0;i--){
+					pagedemo[i].style.transform="rotateY(0deg)";
+				}
+			}
+		}
+	</script> 	
+</body>	

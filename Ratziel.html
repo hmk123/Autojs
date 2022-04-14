@@ -33,7 +33,7 @@
 /*chengji*/
             z-index: calc(var(--i)*99);
         }
-        .b,.c{
+        .b,.f{
             border: solid 20px #576574;
             border-left: none;
             top: -20px;
@@ -43,9 +43,9 @@
             border-left: #576574 20px solid;
         }
         .a:hover .c,  .a:hover .d, .a:hover .e, .a:hover .f{
-            transform: rotateY(-180deg);
-            transition: var(--s)*.4s;
-            z-index: calc(var(--s)*99);
+          /* transform: rotateY(-180deg);
+            transition: var(--s)*4s;
+            z-index: calc(var(--s)*99);*/
         }
         .a:hover{
             transform: translateX((100px));
@@ -57,13 +57,56 @@
 
 <body>
     
-    <div class="a">
-        <div class="b" style="--i:2;background-image:url(1.png);"></div>
-        <div class="c" style="--i:4;--s:1;background-image:url(1.png);"></div>
-        <div class="d" style="--i:3;--s:2;background-image:url(1.png);"></div>
-        <div class="e" style="--i:2;--s:3;background-image:url(1.png);"></div> 
-        <div class="f" style="--i:1;--s:4;background-image:url(1.png);"></div>
+    <div class="a"  id ='page'  onclick="myFunction()">
+        <div class="b"  id = 'page1' style="--i:2;background-image:url(1.png);">
+            <h1>asdasdasd</h1>
+       </div>
+        <div class="c"  id = 'page2' style="--i:4;--s:1;background-image:url(2.png);   
+       "></div>
+        <div class="d"  id = 'page3' style="--i:3;--s:2;background-image:url(1.png);"></div>
+        <div class="e"  id = 'page4' style="--i:2;--s:3;background-image:url(1.png);"></div> 
+        <div class="f"  id = 'page5' style="--i:1;--s:4;background-image:url(1.png);"></div>
     </div>
 
 </body>
+
+<script>
+    var page=1;
+    var pagedemo = document.getElementById("page");
+    console.log(pagedemo)
+    var  img =  new Image()
+    img.src='2.png'
+    myFunction2=function(){
+               /* transform: rotateY(-180deg);
+            transition: var(--s)*4s;
+            z-index: calc(var(--s)*99);*/
+            if (page>=6) return
+        var page1 = document.getElementById("page"+(page-1).toString());
+      
+        page1.style.transition="0s";
+     page1 .style. backgroundImage=img
+     console.log(123)
+        
+    }
+
+    myFunction=function(){
+               /* transform: rotateY(-180deg);
+            transition: var(--s)*4s;
+            z-index: calc(var(--s)*99);*/
+            if (page>=6) return
+        var page1 = document.getElementById("page"+page.toString());
+        
+        page1.style.transition="2s";
+        page1.style.transform="rotateY(-180deg)";
+
+    
+
+        page++
+          /*scaleX将翻书镜像后的图像还原镜像*/
+        
+        setTimeout( 'myFunction2()',2000)
+        
+    }
+</script> 
+
 </html>
