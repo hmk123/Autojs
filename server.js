@@ -7,10 +7,6 @@ var fs = require("fs");
 // 2. 使用http.createServer()方法创建一个web服务器，通过server接收
 let server = http.createServer();
 
-
-
-
-var request = require('request');
 // 3. 服务器要做的事：提供服务，发送、接收、处理请求，并发送响应
 /** server.on注册request请求事件，客户端请求时会自动触发服务器的request请求事件；
 	回调函数对请求进行处理，参数介绍：
@@ -106,22 +102,7 @@ server.on("request", function (req, res) {
         res.write("首页");
         res.end()
       }
-      /////////
-      else if (url2 == "/wx") {
-        // res.write--在页面内写入内容 
-        req.query = querystring.parse(url.split('?')[1])
-        
-        
-        var text =  JSON.stringify(req.query)
-        name  = JSON.parse(text)['name']
-        did  = JSON.parse(text)['echostr']
 
-           var a = []
-           res.write(did);
-           res.end()
-         
-      }
-      /////////////////////////
       else if (url2 == "/id") {
         // res.write--在页面内写入内容 
         fs.readFile('data.json', 'utf8', (err, data) => {
@@ -156,24 +137,6 @@ server.on("request", function (req, res) {
 
 
 
-      else if (url2 == "/2") {
-        request('https://api.weixin.qq.com/cgi-bin/draft/count?access_token=55_bKeB1KWAVy5zQ7q7NjCx5vqi7yocJE1nY77I54oZ6ZroIEGPD9bcuF9T-0ADJW49JfxbrIMw3SYjJFsWjqlE-EJ3zz7_3OYUXpjJ9ktUq1Y8K94jMB7YnTWQp-AtTTbrz14rabJW6j4oDd3jYEDbACALRQ', function(err, response, body){
-          //err 当前接口请求错误信息
-          //response 一般使用statusCode来获取接口的http的执行状态
-          //body 当前接口response返回的具体数据 返回的是一个jsonString类型的数据 
-          //需要通过JSON.parse(body)来转换
-          if(!err && response.statusCode == 200){
-            //todoJSON.parse(body)
-            
-            /*------------ */
-            var ress = JSON.parse(body);
-            console.log(ress.total_count)
-            
-            res.write(body)
-            res.end()
-          }
-        })
-    }
   else if (url2 == "/") {
       res.setHeader('Content-Type','text/html')
     // res.write--在页面内写入内容 

@@ -416,7 +416,7 @@ function main() {
                 var node = text("有缘人").findOnce()
                 if (node) {
                     log("有缘人")
-                    检测对你心动()
+                   // 检测对你心动()
                     node.parent().click()
                     sleep(3333)
                 }
