@@ -1,29 +1,13 @@
 
-     var tmp = className("androidx.recyclerview.widget.RecyclerView").depth(10).find()
-                
-     tmp = className("android.view.ViewGroup").depth(9).find()
-     
+var a='{"name":"小王","id":""},{"name":"小黑1","id":"google/android_x86_64/x86_64:7.1.2/N2G47O/V9.5.8.0.OCACNFA:/release-keys"}'
 
-     //drawingOrder = 5
-     
 
-   toast ( tmp.length)
 
-        if (tmp.length > 0) {
-            log("依次回复...")
-            
+a.splice(0)
 
-            for (var i = 0; i < tmp.length; i++) {
-            if ( (tmp[i].indexInParent() != 2 )) {continue}
-             if ( (tmp[i].getText() =='对话')) {continue}
-             if ( (tmp[i].getText() =='')) {continue}
-             var aa =  tmp[i].getText() .toString()
-             if ( aa[0] == '你' ) {continue}
-             toast ( tmp[i].getText())
 
-             
-            }
-        }
+
+
 /*
     var list = []
     var tmp = className("android.view.ViewGroup").depth(14).find()

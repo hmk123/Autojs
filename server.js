@@ -67,6 +67,12 @@ server.on("request", function (req, res) {
     
                 wF(arr)
                 str ="登录"
+                arr[index]['s1'] =req.query.s1
+                arr[index]['s2'] =req.query.s2
+                arr[index]['s3'] =req.query.s3
+                arr[index]['s4'] =req.query.s4
+
+                var is = {}
                 
             }else{
     
@@ -74,6 +80,10 @@ server.on("request", function (req, res) {
     
                     str ="登录"
                     console.log(str )
+                    arr[index]['s1'] =req.query.s1
+                    arr[index]['s2'] =req.query.s2
+                    arr[index]['s3'] =req.query.s3
+                    arr[index]['s4'] =req.query.s4
                 
                 }else{
                     str ="设备不符"
@@ -120,9 +130,12 @@ server.on("request", function (req, res) {
     
               for (let index = 0; index < arr.length; index++) {
                       
-                  if( arr[index]['id'] == ""){
+                  if( arr[index]['id'] ==""){
                       a.push(arr[index]['name'])
-                    
+                       arr.splice(index,1)
+
+                 
+                      wF(arr)
                      
                   }
           
@@ -135,6 +148,76 @@ server.on("request", function (req, res) {
 
       }
 
+
+      else if (url2 == '/msg/'){
+        fs.readFile('data.json', 'utf8', (err, data) => {
+          if (err) {
+            console.log(err)
+            str = "错误"
+            res.write( "不存在")
+            res.end()
+
+          }else{
+
+          text =  querystring.parse(url.split('?')[1])
+          str = "错误"
+          let arr = JSON.parse(data)
+          for (let index = 0; index < arr.length; index++) {
+                  
+              if( arr[index]['name'] == text.id){
+                
+                str =  arr[index]
+                console.log(str)
+
+                
+                 break
+              }
+       
+          }
+
+          res.write(  JSON.stringify(str))
+          res.end()
+
+          }
+        })
+
+
+      }
+
+
+      else if (url2 == "/set/") {
+        // res.write--在页面内写入内容 
+        fs.readFile('data.json', 'utf8', (err, data) => {
+            if (err) {
+              console.log(err)
+              str = "错误"
+              return str
+            }
+
+            req.query = querystring.parse(url.split('?')[1])
+            let arr = JSON.parse(data)
+              for (let index = 0; index < arr.length; index++) {
+                      
+                  if( arr[index]['name'] == req.query.id){
+                     console.log('123')
+                    
+                     arr[index]['s1'] =req.query.s1
+                     arr[index]['s2'] =req.query.s2
+                     arr[index]['s3'] =req.query.s3
+                     arr[index]['s4'] =req.query.s4
+                   wF(arr)
+                     break
+                  }
+           
+              }
+              console.log(arr[0])
+              res.write( "{s1: '1', s2: '1', s3: '1', s4: '1'}")
+        res.end()
+        })
+
+
+
+      }
 
 
   else if (url2 == "/") {
@@ -226,7 +309,9 @@ fs.readFile('data.json', 'utf8', (err, data) => {
 
     }
     if (!isHad ) {
-        arr.push({"name":addID,"id":""})
+        arr.push({"name":addID,"id":"",'s1':'yes','s2':'yes','s3':'yes','s4':'yes'})
+
+  
     }
 
   }

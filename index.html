@@ -11,26 +11,30 @@
 
 </head>
 <body>
+
+    <div   id ='app2' > 
+        <p>账号</p> <input type="text" name="" id="ss" value=""> <input type="button" value="查询" class="get2"    @click="getmsg"  >
+       <p>回复1</p> <input type="text" name="" id="s1" value="1">
+       <p>回复2</p> <input type="text" name="" id="s2" value="1">
+       <p>回复3</p> <input type="text" name="" id="s3"value="1">
+       <p>回复4</p> <input type="text" name="" id="s4"value="1"> {{joke}}
+       <input type="button" value="提交" class="get2"    @click="get"  >
+       <p>回复5</p> <input type="text" name="" id="">
+      
+    </div>
     <div id ='app' class="ad"> 
         <input type="button" value="查看未使用的注册码" class="get" @click="get">
+        <input type="button" value="增加注册码" class="get" @click="get2">
         <p>{{joke}}</p>
         <ol >
-            <li v-for="(item,index) in list" >
-                 {{item}}
-            </li>
+            <li v-for="(item,index) in list"  >
+                <p  @click="set(index)"> {{item}} </p> 
+            </li> 
           </ol>
     </div>
 
 
-<div> 
-    <p>账号</p> <input type="text" name="" id="">
-   <p>回复1</p> <input type="text" name="" id="">
-   <p>回复2</p> <input type="text" name="" id="">
-   <p>回复3</p> <input type="text" name="" id="">
-   <p>回复4</p> <input type="text" name="" id="">
-   <p>回复5</p> <input type="text" name="" id="">
-   <input type="button" value="提交" class="get2" >
-</div>
+
 
    
 </body>
@@ -57,7 +61,25 @@ var app = new Vue({
         list:[]
     },
     methods:{
-       
+
+        set:function(index){
+        var s2 =  document.getElementById('ss') .value = this.list [index]
+//app2.getmsg()
+    },
+
+
+        get2:function(){
+            var that = this
+            that.list = []
+            axios.get("http://49.232.167.91:3000/add")
+            .then(function(res){
+               
+                  that. joke= '添加成功'
+                
+            },function(err){
+                console.log(err)
+            })
+        },
         get:function(){
             var that = this
             that.list = []
@@ -69,18 +91,95 @@ var app = new Vue({
                for (let index = 0; index < a.length; index++) {
                 that. list.push ( a[index])
                }
-               
+              // that. joke= a.length .toString() +"个 可用"
 
                 
             },function(err){
                 console.log(err)
             })
         }
+ 
+
+
     }
+
 })
 
+var app2 = new Vue({
 
- app.get()
+
+
+
+el:'#app2',
+data:{
+    joke:'列表',
+    list:[]
+},
+methods:{
+   
+    get:function(){
+        var that = this
+        that.list = []
+        var s2 =  document.getElementById('ss') 
+        var s1 =  document.getElementById('s1') 
+        var s2 =  document.getElementById('s2') 
+        var s3 =  document.getElementById('s3') 
+        var s4 =  document.getElementById('s4') 
+
+        var a = `id=${ss.value}&s1=${s1.value}&s2=${s2.value}&s3=${s3.value}&s4=${s4.value}`
+        console.log(a)
+
+        axios.get("http://127.0.0.1:3000/set/?"+a)
+        .then(function(res){
+           console.log(res.data) 
+        },function(err){
+            console.log(err)
+        })
+    }
+    ,
+    getmsg:function(){
+        var a = `id=${ss.value}`
+        console.log(document.getElementById('ss') .value)
+
+        if (!document.getElementById('ss') .value ){
+
+            document.getElementById('ss') .value = '小  王'
+            return
+        }
+
+
+        axios.get("http://127.0.0.1:3000/msg/?"+a)
+        .then(function(res){
+           console.log(res.data) 
+       
+         str =  res.data
+
+      
+        var s1 =  document.getElementById('s1') .value = str.s1
+        var s2 =  document.getElementById('s2') .value = str.s2
+        var s3 =  document.getElementById('s3') .value = str.s3
+        var s4 =  document.getElementById('s4') .value = str.s4
+
+
+
+
+        },function(err){
+            console.log(err)
+        })
+
+
+    }
+
+
+    ,
+},
+
+
+
+
+})
+
+ //app.get()
 
 </script>
 </html>
