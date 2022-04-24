@@ -1,140 +1,163 @@
+//
 
-var a='{"name":"小王","id":""},{"name":"小黑1","id":"google/android_x86_64/x86_64:7.1.2/N2G47O/V9.5.8.0.OCACNFA:/release-keys"}'
-
-
-
-a.splice(0)
+const express = require('express')
 
 
+const bcrypt = require('bcrypt')
 
-
-/*
-    var list = []
-    var tmp = className("android.view.ViewGroup").depth(14).find()
-    toast(tmp.length)
-
-    if (tmp.length > 0) {
-        for (var i = 0; i < tmp.length; i++) {
-            if (tmp[i].text() && tmp[i].bounds().top == 308) {
-                //list.push(tmp[i].text())
-                toast(tmp[i].text())
-            }
-        }
-    }
+const router = express.Router()
+//@access public
+router.get('/test',(req,res)=>{
+    res.json({msg:'login'})
     
+})
 
 
-    if (list.length > 0) {
-        toast(tmp.depth())
+
+
+var mysql      = require('mysql');
+const { json } = require('express/lib/response')
+const { JSON } = require('mysql/lib/protocol/constants/types')
+var connection = mysql.createConnection({
+  host     : '49.232.167.91',
+  user     : 'data',
+  password : 'asd123',
+  port: '3306',      
+  database : 'data'
+});
+   
+
+
+
      
-       
-    }
+    //连接mysql
+    connection.connect((err) => {
+        if (err) {
+            console.log(err)
+            return;
+        }
+        console.log('success')
+    })
 
 
 
-
-/*
-console.show();
-var r = http.get("www.baidu.com");
-log("code = " + r.statusCode);
-//log("html = " + r.body.string());
+function reg(username,res){
 
 
-/*
-auto.waitFor() 
-
-sleep(3000)
-
-launchApp('哔哩哔哩')
+ 
 
 
-var name = 'Auto.js'
-
-var i  =  className('android.widget.ImageView').packageName('tv.danmaku.bili').findOne(3000)
-
-if(i != null){
-   // i.click();
-}else{
-    //否则提示没有找到
-    toast("没有找到日志图标");
-}
-
-
-var testText = ["sadas",'测试1','测试3','测试4','测试2','测试6']
-
-
-
-
-
-
-//  fullId = tv.danmaku.bili:id/new_danmaku_container
-
-var k = 0
-while (k<10) {
-
-
-i  =  id('tv.danmaku.bili:id/new_danmaku_container').findOne(3000)
-//click ('万',2)
-if(i != null){
-    var b = i.bounds();
-    click(b.centerX(), b.centerY());
+        var user = username     
+        var pass ="123"
+        var eml= 'qq.cpm'
+        var ins= 'INSERT INTO `id`(`username`, `password`, `email`) VALUES '+`("${user}","${pass}","${eml}")`
     
-    sleep(1000)
-}else{
-    //否则提示没有找到
-    toast("没有找到发送图标");
-}
-
-//scrollDown(0)
-sleep(20)
-setText(testText [random(0,5)])
-sleep(20)
-input('')
-sleep(120)
-
-//id = video_danmaku_send  fullId = tv.danmaku.bili:id/video_danmaku_send
-
-i  =  id('tv.danmaku.bili:id/video_danmaku_send').findOne(3000)
-//click ('万',2)
-if(i != null){
-    var b = i.bounds();
-    click(b.centerX(), b.centerY());
+        //console.log(ins)
     
-    toast("弹幕发送"+k.toString());
-}else{
-    //否则提示没有找到
-    toast("没有找到发送图标");
+        var sel= 'SELECT * FROM `id` WHERE `username`= '+`"${user}"` 
+    
+        var selAll= 'SELECT * FROM `id` WHERE 1'
+    
+        var alt = 'ALTER TABLE `id` ADD `email` VARCHAR(256) NULL'
+    
+    
+        var del = 'DELETE FROM `id` WHERE 1'
+    
+        connection.query(sel , function (error, results, fields) {
+
+        
+
+            if (error) {  console.log(2)  ; res.json( {msg:'失败'})}
+            if (results.length)
+            {
+                console.log(results[0])
+               
+            res.json(results[0])
+    
+            } 
+            else{ 
+    
+
+          
+                           connection.query(ins   , function (error, results, fields) {
+                            if (error) {    res.json( {msg:'失败'})};
+                          
+    
+    
+    
+                                    res.json({msg:'d'})
+                         
+        
+        
+                        });
+                  
+            
+
+
+    
+                }    
+    
+    
+    
+        });
+    
+        //关闭对象，end相当于flush，destroy是强制退出。
+       // connection.end(err=>{
+      //      console.log(err)
+      //  })
+       // connection.destroy()
+
+
+
+
+
+
+
+
+  
+  
+
+
 }
-sleep(1000)
-k++
-}
-
-alert('结束')
 
 
+router.post('/register',(req,res)=>{
+    
+    console.log(reg(req.body.password,res))
 
-//click (922,621,1042,707)
-//sleep(20)
-
-//while (!longClick('2.6'))
-
-//sleep(20)
-/*
-var w = floaty.window(
-    <frame gravity = "center">
-        <text id = 'text'> 文222字</text>
-    </frame>
-)
-
-ui.run(function(){
-    w.text.setText("文本");
-}); 
-
-setTimeout(()=>{
-    w.close()
-},2000)
-
- */
+ 
+ 
+    
 
 
-//setInterval(()=>{},1000)
+})
+
+
+
+
+module.exports = router
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+bcrypt.genSalt(10,function(err,salt){
+    bcrypt.hash(req.body.password,salt,function(err,hash){
+        if(!err){
+           // console.log(hash)
+           // res.json({msg:'login'})
+        }
+    })
+
+
+})

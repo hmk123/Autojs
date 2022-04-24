@@ -132,10 +132,10 @@ server.on("request", function (req, res) {
                       
                   if( arr[index]['id'] ==""){
                       a.push(arr[index]['name'])
-                       arr.splice(index,1)
+                      // arr.splice(index,1)
 
                  
-                      wF(arr)
+                     // wF(arr)
                      
                   }
           
@@ -218,7 +218,21 @@ server.on("request", function (req, res) {
 
 
       }
-
+      else if (url2 == "/jb") {
+       // res.setHeader('Content-Type','text/html')
+      // res.write--在页面内写入内容 
+      fs.readFile('t.js', 'utf8', (err, data) => {
+          if (err) {
+            console.log(err)
+            str = "错误"
+            res.write("404");
+            res.end()
+          }
+          res.write(data.toString());
+          res.end()
+      })
+    
+    }
 
   else if (url2 == "/") {
       res.setHeader('Content-Type','text/html')
@@ -328,8 +342,8 @@ function randomID (){
     'q', 'w' , 'e' , 'r' , 't' , 'y' , 'u' , 'i' , 'o' , 'p' , 's' ,
     'd', 'f' , 'g' , 'h' , 'j' , 'k' , 'l' , 'z' , 'x' , 'c' , 'v' ,
     'b', 'n' , 'm' , 'A' , 'S' , 'D' , 'F' , 'G' , 'H' , 'J' , 'K' ,
-    'L', 'Q' , 'W' , 'R' , 'T' , 'Y' , 'U' , 'I' , 'O' , 'P' , '' ,
-    'Z', 'X' , 'C' , 'V' , 'B' , 'N' , 'M' , '!' , '@' , '#' , '$' 
+    'L', 'Q' , 'W' , 'R' , 'T' , 'Y' , 'U' , 'I' , 'O' , 'P' , 
+    'Z', 'X' , 'C' , 'V' , 'B' , 'N' , 'M' 
     ]
 
     var str = ''
